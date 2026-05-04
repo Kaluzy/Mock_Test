@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raphael's Mock ELA Test - MCAP Preparation</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            border-left: 4px solid #3498db;
+            padding-left: 15px;
+            margin-top: 30px;
+        }
+        .question {
+            margin-bottom: 25px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 3px solid #ecf0f1;
+        }
+        .question-number {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .passage {
+            background: #fff;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid #eee;
+            margin: 10px 0;
+            font-style: italic;
+            color: #2c3e50;
+            line-height: 1.7;
+        }
+        .options {
+            margin-top: 10px;
+        }
+        .option {
+            display: block;
+            margin: 8px 0;
+            padding: 10px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .option:hover {
+            background: #ecf0f1;
+            border-color: #bdc3c7;
+        }
+        .option.selected {
+            background: #3498db;
+            color: white;
+            border-color: #2980b9;
+        }
+        .textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 16px;
+            resize: vertical;
+            box-sizing: border-box;
+        }
+        .button {
+            display: inline-block;
+            background: #27ae60;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin: 10px 5px;
+        }
+        .button:hover {
+            background: #219a52;
+        }
+        .button-danger {
+            background: #e74c3c;
+        }
+        .button-danger:hover {
+            background: #c0392b;
+        }
+        .results {
+            margin-top: 30px;
+            padding: 20px;
+            background: #e8f8f5;
+            border-radius: 8px;
+            border-left: 4px solid #27ae60;
+            display: none;
+        }
+        .score {
+            font-size: 24px;
+            font-weight: bold;
+            color: #27ae60;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .feedback {
+            margin-top: 20px;
+            line-height: 1.8;
+        }
+        .correct {
+            color: #27ae60;
+        }
+        .incorrect {
+            color: #e74c3c;
+        }
+        .hidden {
+            display: none;
+        }
+        .progress {
+            margin: 20px 0;
+            padding: 10px;
+            background: #ecf0f1;
+            border-radius: 4px;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Raphael's Mock ELA Test</h1>
+        <p style="text-align: center; color: #7f8c8d; font-style: italic;">
+            MCAP Preparation - Based on Current Studies (Week of May 4-8, 2026)
+        </p>
+        
+        <div class="progress">
+            Question <span id="currentQuestion">1</span> of 15
+        </div>
+        
+        <form id="quizForm">
+            <!-- Questions will be dynamically inserted here -->
+            <div id="questionsContainer">
+                <!-- Questions will be inserted by JavaScript -->
+            </div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <button type="button" id="prevBtn" class="button">Previous Question</button>
+                <button type="button" id="nextBtn" class="button">Next Question</button>
+                <button type="button" id="submitBtn" class="button" style="background: #2980b9;">Submit Test</button>
+            </div>
+        </form>
+        
+        <div id="resultsContainer" class="results">
+            <h2>Your Results</h2>
+            <div class="score" id="scoreDisplay">0%</div>
+            <div id="feedbackDisplay" class="feedback"></div>
+            <div style="text-align: center; margin-top: 20px;">
+                <button type="button" id="retakeBtn" class="button">Retake Test</button>
+                <button type="button" id="showAnswersBtn" class="button">Show Correct Answers</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Quiz data based on the mock test
+        const quizData = [
+            {
+                question: "What is the main topic of the passage about Jazz music?",
+                passage: `Students in Mr. McClure's class were excited to begin their new unit on Jazz music. As part of their preparation for the upcoming MCAP tests, they would explore the rich history of this American art form. Jazz originated in the late 19th and early 20th centuries in African American communities, particularly in New Orleans. 
+
+The music combines elements of blues, ragtime, and European harmonic structure. What makes Jazz special is its emphasis on improvisation - where musicians create melodies on the spot, often building on a familiar tune. Famous early jazz musicians like Louis Armstrong and Duke Ellington helped make Jazz popular across the United States and around the world.
+
+As part of their unit, students would listen to recordings from different jazz eras, learn about influential figures, and even try creating their own simple improvisations using classroom instruments. The unit would connect to their studies in history, culture, and even mathematics through rhythm patterns and fractions in musical time signatures.`,
+                options: [
+                    "How to play jazz instruments",
+                    "The history and elements of jazz music",
+                    "Famous jazz musicians from New Orleans",
+                    "How to prepare for MCAP tests"
+                ],
+                correct: 1, // Index of correct answer (0-based)
+                explanation: "The passage discusses the history, origins, and elements of jazz music."
+            },
+            {
+                question: "What does 'improvisation' most likely mean in the context of jazz music?",
+                options: [
+                    "Playing music from written sheet music exactly",
+                    "Creating music spontaneously while performing",
+                    "Listening to jazz recordings quietly",
+                    "Studying music theory in a textbook"
+                ],
+                correct: 1,
+                explanation: "Improvisation in jazz means creating melodies on the spot during performance."
+            },
+            {
+                question: "According to the passage, where did Jazz originate?",
+                options: [
+                    "New York City",
+                    "Chicago, Illinois",
+                    "African American communities in New Orleans",
+                    "European concert halls"
+                ],
+                correct: 2,
+                explanation: "Jazz originated in African American communities, particularly in New Orleans."
+            },
+            {
+                question: "Why might studying Jazz help students with their math skills?",
+                options: [
+                    "Jazz musicians are usually good at math",
+                    "Jazz involves rhythm patterns and fractions in time signatures",
+                    "Students calculate how much music costs",
+                    "Jazz bands need to count their instruments"
+                ],
+                correct: 1,
+                explanation: "Jazz involves understanding rhythm patterns and fractional time signatures, which connects to math concepts."
+            },
+            {
+                question: "How does the passage organize its information about Jazz?",
+                options: [
+                    "Problem and solution",
+                    "Cause and effect",
+                    "Description of a topic with supporting details",
+                    "Chronological order of events"
+                ],
+                correct: 2,
+                explanation: "The passage describes jazz music with supporting details about its history, elements, and educational value."
+            },
+            {
+                question: "The students were ______ to begin their new unit on Jazz music.",
+                options: [
+                    "bored and uninterested",
+                    "very enthusiastic and eager",
+                    "slightly nervous",
+                    "feeling tired"
+                ],
+                correct: 1,
+                explanation: "The email states students were 'excited' to begin their new unit on Jazz music."
+            },
+            {
+                question: "Jazz combines elements of blues, ragtime, and ______ structure.",
+                options: [
+                    "related to harmony and chords in music",
+                    "very loud and noisy",
+                    "slow and boring",
+                    "only for dancing"
+                ],
+                correct: 0,
+                explanation: "Jazz combines blues, ragtime, and European harmonic structure."
+            },
+            {
+                question: "Students would listen to recordings from different jazz ______.",
+                options: [
+                    "time periods or generations",
+                    "types of musical instruments",
+                    "volumes or loudness levels",
+                    "music stores or shops"
+                ],
+                correct: 0,
+                explanation: "Students would listen to recordings from different jazz eras (time periods/generations)."
+            },
+            {
+                question: "As part of their unit, students would ______ the rich history.",
+                options: [
+                    "ignore or avoid",
+                    "travel to a different country",
+                    "investigate or study carefully",
+                    "forget completely"
+                ],
+                correct: 2,
+                explanation: "Students would explore/investigate the rich history of jazz as part of their unit."
+            },
+            {
+                question: "The unit would connect to their studies in history, culture, and mathematics.",
+                options: [
+                    "separate from",
+                    "be related to or linked with",
+                    "replace completely",
+                    "have nothing to do with"
+                ],
+                correct: 1,
+                explanation: "The email states the unit would 'connect to their studies in history, culture, and even mathematics'."
+            },
+            {
+                question: "Which sentence is written correctly?",
+                options: [
+                    "The students is excited about jazz.",
+                    "The students are excited about jazz.",
+                    "The students am excited about jazz.",
+                    "The students be excited about jazz."
+                ],
+                correct: 1,
+                explanation: "Subject-verb agreement: 'students' (plural) requires 'are' (plural verb)."
+            },
+            {
+                question: "Which word correctly completes the sentence: 'Ms. McClure posted the homework assignment ___ the class website.'",
+                options: [
+                    "in",
+                    "on",
+                    "at",
+                    "by"
+                ],
+                correct: 1,
+                explanation: "We post things 'on' a website, not 'in', 'at', or 'by' it."
+            },
+            {
+                question: "Which sentence has correct punctuation?",
+                options: [
+                    "After lunch we went to the library to study",
+                    "After lunch, we went to the library to study",
+                    "After lunch we went, to the library to study",
+                    "After lunch we went to the library, to study"
+                ],
+                correct: 1,
+                explanation: "Introductory phrase 'After lunch' requires a comma before the main clause."
+            },
+            {
+                question: "Which is the correctly spelled word?",
+                options: [
+                    "recieve",
+                    "receive",
+                    "recieve",
+                    "receeve"
+                ],
+                correct: 1,
+                explanation: "The correct spelling is 'receive' (i before e except after c)."
+            },
+            {
+                question: "Which words should be capitalized in this sentence: 'we studied jazz music in mrs. mcclure's class on monday'",
+                options: [
+                    "we, studied, jazz",
+                    "Jazz, Mrs. McClure's, Monday",
+                    "We, Jazz, Monday",
+                    "We, Jazz, Mrs. McClure's, Monday"
+                ],
+                correct: 3,
+                explanation: "Capitalize: first word of sentence, proper nouns (Mrs. McClure's), and days of the week (Monday)."
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        const answers = new Array(quizData.length).fill(null);
+
+        // DOM elements
+        const questionsContainer = document.getElementById('questionsContainer');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const submitBtn = document.getElementById('submitBtn');
+        const resultsContainer = document.getElementById('resultsContainer');
+        const scoreDisplay = document.getElementById('scoreDisplay');
+        const feedbackDisplay = document.getElementById('feedbackDisplay');
+        const retakeBtn = document.getElementById('retakeBtn');
+        const showAnswersBtn = document.getElementById('showAnswersBtn');
+        const currentQuestionSpan = document.getElementById('currentQuestion');
+
+        // Initialize the quiz
+        function initQuiz() {
+            loadQuestion();
+            updateNavigation();
+        }
+
+        // Load current question
+        function loadQuestion() {
+            // Clear previous question
+            questionsContainer.innerHTML = '';
+            
+            const questionData = quizData[currentQuestionIndex];
+            
+            // Create question element
+            const questionDiv = document.createElement('div');
+            questionDiv.className = 'question';
+            
+            // Build question HTML
+            let questionHTML = `<div class="question-number">${currentQuestionIndex + 1}. ${questionData.question}</div>`;
+            
+            // Add passage if it exists (for question 1)
+            if (questionData.passage) {
+                questionHTML += `<div class="passage">${questionData.passage.replace(/\n/g, '<br>')}</div>`;
+            }
+            
+            // Add options
+            questionHTML += `<div class="options">`;
+            questionHTML += questionData.options.map((option, index) => 
+                `<label class="option" data-index="${index}">
+                    <input type="radio" name="option" value="${index}" ${answers[currentQuestionIndex] === index ? 'checked' : ''}>
+                    ${option}
+                </label>`).join('');
+            questionHTML += `</div>`;
+            
+            questionDiv.innerHTML = questionHTML;
+            questionsContainer.appendChild(questionDiv);
+            
+            // Add event listeners to options
+            const options = questionDiv.querySelectorAll('.option');
+            options.forEach(option => {
+                option.addEventListener('click', () => {
+                    // Remove selected class from all options
+                    options.forEach(opt => opt.classList.remove('selected'));
+                    // Add selected class to clicked option
+                    option.classList.add('selected');
+                    // Update answer
+                    const index = parseInt(option.getAttribute('data-index'));
+                    answers[currentQuestionIndex] = index;
+                });
+            });
+        }
+
+        // Update navigation buttons
+        function updateNavigation() {
+            prevBtn.disabled = currentQuestionIndex === 0;
+            nextBtn.textContent = currentQuestionIndex === quizData.length - 1 ? 'Finish' : 'Next Question';
+            currentQuestionSpan.textContent = currentQuestionIndex + 1;
+        }
+
+        // Navigate to previous question
+        function prevQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                loadQuestion();
+                updateNavigation();
+            }
+        }
+
+        // Navigate to next question
+        function nextQuestion() {
+            if (currentQuestionIndex < quizData.length - 1) {
+                currentQuestionIndex++;
+                loadQuestion();
+                updateNavigation();
+            }
+        }
+
+        // Submit the quiz
+        function submitQuiz() {
+            // Check if all questions are answered
+            const unanswered = answers.indexOf(-1);
+            if (unanswered !== -1) {
+                alert('Please answer all questions before submitting.');
+                return;
+            }
+            
+            // Calculate score
+            let correctCount = 0;
+            quizData.forEach((question, index) => {
+                if (answers[index] === question.correct) {
+                    correctCount++;
+                }
+            });
+            
+            const scorePercentage = Math.round((correctCount / quizData.length) * 100);
+            
+            // Show results
+            scoreDisplay.textContent = `${scorePercentage}%`;
+            
+            // Generate feedback
+            let feedback = `<p>You scored ${correctCount} out of ${quizData.length} questions correct.</p>`;
+            
+            if (scorePercentage >= 90) {
+                feedback += `<p class="correct">Excellent work! You're well prepared for the MCAP ELA test!</p>`;
+            } else if (scorePercentage >= 80) {
+                feedback += `<p class="correct">Great job! You're mostly prepared, just review a few areas.</p>`;
+            } else if (scorePercentage >= 70) {
+                feedback += `<p>Good effort! Focus on the areas below to improve.</p>`;
+            } else {
+                feedback += `<p class="incorrect">Keep studying! Review the explanations below and try again.</p>`;
+            }
+            
+            feedback += `<h3>Question Review:</h3><ol>`;
+            quizData.forEach((question, index) => {
+                const isCorrect = answers[index] === question.correct;
+                feedback += `<li class="${isCorrect ? 'correct' : 'incorrect'}">
+                    <strong>Q${index + 1}:</strong> ${question.question}<br>
+                    <strong>Your answer:</strong> ${question.options[answers[index]] || 'Not answered'}<br>
+                    <strong>Correct answer:</strong> ${question.options[question.correct]}<br>
+                    <strong>Explanation:</strong> ${question.explanation}
+                </li>`;
+            });
+            feedback += `</ol>`;
+            
+            feedbackDisplay.innerHTML = feedback;
+            
+            // Show results container
+            questionsContainer.style.display = 'none';
+            document.querySelector('.progress').style.display = 'none';
+            document.querySelector('.button-group').style.display = 'none';
+            resultsContainer.style.display = 'block';
+            
+            // Save results locally
+            saveResultsLocally(correctCount, quizData.length, scorePercentage);
+        }
+
+        // Save results to localStorage
+        function saveResultsLocally(correct, total, percentage) {
+            const result = {
+                date: new Date().toISOString(),
+                score: `${correct}/${total}`,
+                percentage: percentage,
+                answers: answers
+            };
+            
+            // Get existing results or create new array
+            const existingResults = JSON.parse(localStorage.getItem('raphaelQuizResults') || '[]');
+            existingResults.push(result);
+            
+            // Keep only last 10 attempts
+            const limitedResults = existingResults.slice(-10);
+            localStorage.setItem('raphaelQuizResults', JSON.stringify(limitedResults));
+            
+            console.log('Results saved locally');
+        }
+
+        // Retake the quiz
+        function retakeQuiz() {
+            // Reset answers
+            answers.fill(null);
+            currentQuestionIndex = 0;
+            
+            // Hide results, show questions
+            resultsContainer.style.display = 'none';
+            questionsContainer.style.display = 'block';
+            document.querySelector('.progress').style.display = 'block';
+            document.querySelector('.button-group').style.display = 'flex';
+            
+            // Reload first question
+            loadQuestion();
+            updateNavigation();
+        }
+
+        // Show correct answers without retaking
+        function showCorrectAnswers() {
+            // Disable further interaction
+            const options = document.querySelectorAll('.option');
+            options.forEach(option => {
+                option.style.pointerEvents = 'none';
+                option.style.opacity = '0.7';
+            });
+            
+            // Show correct answers
+            quizData.forEach((question, index) => {
+                const questionElement = questionsContainer.children[index];
+                if (questionElement) {
+                    const correctOption = questionElement.querySelector(`.option[data-index="${question.correct}"]`);
+                    if (correctOption) {
+                        correctOption.style.background = '#27ae60';
+                        correctOption.style.color = 'white';
+                    }
+                }
+            });
+            
+            showAnswersBtn.textContent = 'Hide Answers';
+            showAnswersBtn.removeEventListener('click', showCorrectAnswers);
+            showAnswersBtn.addEventListener('click', hideCorrectAnswers);
+        }
+
+        function hideCorrectAnswers() {
+            // Re-enable interaction
+            const options = document.querySelectorAll('.option');
+            options.forEach(option => {
+                option.style.pointerEvents = 'auto';
+                option.style.opacity = '1';
+            });
+            
+            // Reset option styling
+            quizData.forEach((question, index) => {
+                const questionElement = questionsContainer.children[index];
+                if (questionElement) {
+                    const correctOption = questionElement.querySelector(`.option[data-index="${question.correct}"]`);
+                    if (correctOption) {
+                        // Reset based on whether it's selected
+                        const isSelected = answers[index] === question.correct;
+                        correctOption.style.background = isSelected ? '#3498db' : 'white';
+                        correctOption.style.color = isSelected ? 'white' : '#333';
+                    }
+                }
+            });
+            
+            showAnswersBtn.textContent = 'Show Correct Answers';
+            showAnswersBtn.removeEventListener('click', hideCorrectAnswers);
+            showAnswersBtn.addEventListener('click', showCorrectAnswers);
+        }
+
+        // Event listeners
+        prevBtn.addEventListener('click', prevQuestion);
+        nextBtn.addEventListener('click', () => {
+            if (currentQuestionIndex === quizData.length - 1) {
+                submitQuiz();
+            } else {
+                nextQuestion();
+            }
+        });
+        submitBtn.addEventListener('click', submitQuiz);
+        retakeBtn.addEventListener('click', retakeQuiz);
+        showAnswersBtn.addEventListener('click', showCorrectAnswers);
+
+        // Initialize quiz on load
+        document.addEventListener('DOMContentLoaded', initQuiz);
+    </script>
+</body>
+</html>

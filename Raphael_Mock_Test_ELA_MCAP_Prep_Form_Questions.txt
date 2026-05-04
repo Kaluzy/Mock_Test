@@ -1,0 +1,134 @@
+RAPHAEL'S MOCK ELA TEST - MCAP PREPARATION FORM
+=================================================
+
+FORM TITLE: Raphael's Mock ELA Test - MCAP Preparation
+FORM DESCRIPTION: Practice test for upcoming MCAP ELA Testing (May 4-7, 2026). Based on current studies in McClure Class. Focus: Reading Comprehension, Vocabulary, Grammar, Writing.
+
+QUESTIONS TO ADD TO GOOGLE FORM:
+
+1. What is the main topic of the passage about Jazz music?
+   ○ How to play jazz instruments
+   ○ The history and elements of jazz music
+   ○ Famous jazz musicians from New Orleans
+   ○ How to prepare for MCAP tests
+   CORRECT: The history and elements of jazz music
+
+2. What does 'improvisation' most likely mean in the context of jazz music?
+   ○ Playing music from written sheet music exactly
+   ○ Creating music spontaneously while performing
+   ○ Listening to jazz recordings quietly
+   ○ Studying music theory in a textbook
+   CORRECT: Creating music spontaneously while performing
+
+3. According to the passage, where did Jazz originate?
+   ○ New York City
+   ○ Chicago, Illinois
+   ○ African American communities in New Orleans
+   ○ European concert halls
+   CORRECT: African American communities in New Orleans
+
+4. Why might studying Jazz help students with their math skills?
+   ○ Jazz musicians are usually good at math
+   ○ Jazz involves rhythm patterns and fractions in time signatures
+   ○ Students calculate how much music costs
+   ○ Jazz bands need to count their instruments
+   CORRECT: Jazz involves rhythm patterns and fractions in time signatures
+
+5. How does the passage organize its information about Jazz?
+   ○ Problem and solution
+   ○ Cause and effect
+   ○ Description of a topic with supporting details
+   ○ Chronological order of events
+   CORRECT: Description of a topic with supporting details
+
+6. The students were ______ to begin their new unit on Jazz music.
+   ○ bored and uninterested
+   ○ very enthusiastic and eager
+   ○ slightly nervous
+   ○ feeling tired
+   CORRECT: very enthusiastic and eager
+
+7. Jazz combines elements of blues, ragtime, and ______ structure.
+   ○ related to harmony and chords in music
+   ○ very loud and noisy
+   ○ slow and boring
+   ○ only for dancing
+   CORRECT: related to harmony and chords in music
+
+8. Students would listen to recordings from different jazz ______.
+   ○ time periods or generations
+   ○ types of musical instruments
+   ○ volumes or loudness levels
+   ○ music stores or shops
+   CORRECT: time periods or generations
+
+9. As part of their unit, students would ______ the rich history.
+   ○ ignore or avoid
+   ○ travel to a different country
+   ○ investigate or study carefully
+   ○ forget completely
+   CORRECT: investigate or study carefully
+
+10. The unit would connect to their studies in history, culture, and mathematics.
+    ○ separate from
+    ○ be related to or linked with
+    ○ replace completely
+    ○ have nothing to do with
+    CORRECT: be related to or linked with
+
+11. Which sentence is written correctly?
+    ○ The students is excited about jazz.
+    ○ The students are excited about jazz.
+    ○ The students am excited about jazz.
+    ○ The students be excited about jazz.
+    CORRECT: The students are excited about jazz.
+
+12. Which word correctly completes the sentence: 'Ms. McClure posted the homework assignment ___ the class website.'
+    ○ in
+    ○ on
+    ○ at
+    ○ by
+    CORRECT: on
+
+13. Which sentence has correct punctuation?
+    ○ After lunch we went to the library to study
+    ○ After lunch, we went to the library to study
+    ○ After lunch we went, to the library to study
+    ○ After lunch we went to the library, to study
+    CORRECT: After lunch, we went to the library to study
+
+14. Which is the correctly spelled word?
+    ○ recieve
+    ○ receive
+    ○ recieve
+    ○ receeve
+    CORRECT: receive
+
+15. Which words should be capitalized in this sentence: 'we studied jazz music in mrs. mcclure's class on monday'
+    ○ we, studied, jazz
+    ○ Jazz, Mrs. McClure's, Monday
+    ○ We, Jazz, Monday
+    ○ We, Jazz, Mrs. McClure's, Monday
+    CORRECT: We, Jazz, Mrs. McClure's, Monday
+
+---
+
+INSTRUCTIONS FOR CREATING THE GOOGLE FORM:
+
+1. Go to: https://forms.google.com
+2. Click "Blank" to create a new form
+3. Set the title to: "Raphael's Mock ELA Test - MCAP Preparation"
+4. Set the description to: "Practice test for upcoming MCAP ELA Testing (May 4-7, 2026). Based on current studies in McClure Class. Focus: Reading Comprehension, Vocabulary, Grammar, Writing."
+5. For each question above:
+   - Click "Add question"
+   - Select "Multiple choice" as the question type
+   - Enter the question text
+   - Enter each option
+   - Click the answer key icon to mark the correct answer
+   - Set point value (typically 1 point per question)
+6. Click "Send" in the top right to get the shareable link
+7. Share the link with Raphael so he can take the practice test
+
+ALTERNATIVE: You can also copy the content from the markdown file I created earlier (/Users/kaluzy/Raphael_Mock_Test_ELA_MCAP_Prep.md) which includes the full test with answer key and scoring guide.
+
+The form will automatically collect responses and you can view them in the "Responses" tab to see how Raphael performed.
